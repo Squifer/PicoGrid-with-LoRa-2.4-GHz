@@ -38,22 +38,43 @@ void setup() {
 }
 
 void loop() {
-  // for (slave) id 1: write the value of 0x01, to the coil at address 0x00 
+  // for (slave) id 1: write the value of 0x01, to the holding register at address 0x00 
+  if (!ModbusRTUClient.holdingRegisterWrite(0x01, 0x00)) {
+    SerialUSB.print("Failed to write holding register! ");
+    SerialUSB.println(ModbusRTUClient.lastError());
+  }
+  else{
+    SerialUSB.println("Write successful for address 00");
+  }
+  // wait for 1 second
+  delay(1000);
+
+  // for (slave) id 1: write the value of 0x01, to the holding register at address 0x00 
   if (!ModbusRTUClient.holdingRegisterWrite(0x01, 0x01)) {
     SerialUSB.print("Failed to write holding register! ");
     SerialUSB.println(ModbusRTUClient.lastError());
   }
-
+  else{
+    SerialUSB.println("Write successful for address 01");
+  }
   // wait for 1 second
   delay(1000);
-  SerialUSB.println("Test");
 
-  // for (slave) id 1: write the value of 0x00, to the coil at address 0x00 
-  if (!ModbusRTUClient.coilWrite(1, 0x00, 0x00)) {
-    SerialUSB.print("Failed to write coil! ");
+  // send a Holding registers read request to (slave) id 1, for 1 registers
+  if (!ModbusRTUClient.requestFrom(1, HOLDING_REGISTERS, 0x00, 2)) {
+    SerialUSB.print("failed to read registers! ");
     SerialUSB.println(ModbusRTUClient.lastError());
+  } else {
+    // If the request succeeds, the sensor sends the readings, that are
+    // stored in the holding registers. The read() method can be used to
+    // get the raw temperature and the humidity values.
+    short temp1 = ModbusRTUClient.read();
+    short temp2 = ModbusRTUClient.read();
+    SerialUSB.print("Read successful from address 00: ");
+    SerialUSB.println(temp1);
+    SerialUSB.print("Read successful from address 01: ");
+    SerialUSB.println(temp2);
   }
-
   // wait for 1 second
   delay(1000);
 }
