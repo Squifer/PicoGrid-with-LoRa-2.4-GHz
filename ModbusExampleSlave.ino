@@ -60,7 +60,7 @@ enum
   ADC2,
   TOTAL_ERRORS,
   // leave this one
-  TOTAL_REGS_SIZE 
+  TOTAL_REGS_SIZE = 100
   // total number of registers for function 3 and 16 share the same register array
 };
 
@@ -76,6 +76,31 @@ unsigned int holdingRegs[TOTAL_REGS_SIZE]; // function 3 and 16 register array
 // SoftwareSerial mySerial(receive pin, transmit pin)
 SoftwareSerial rs485(RX, TX); 
 
+int v1p1 = 100;
+int v1p2 = 100;
+int v2p1 = 100;
+int v2p2 = 100;
+int v3p1 = 100;
+int v3p2 = 100;
+int a1p1 = 100;
+int a1p2 = 100;
+int a2p1 = 100;
+int a2p2 = 100;
+int a3p1 = 100;
+int a3p2 = 100;
+int p1p1 = 100;
+int p1p2 = 100;
+int p2p1 = 100;
+int p2p2 = 100;
+int p3p1 = 100;
+int p3p2 = 100;
+int k1p1 = 100;
+int k1p2 = 100;
+int k2p1 = 100;
+int k2p2 = 100;
+int k3p1 = 100;
+int k3p2 = 100;
+
 void setup()
 {
   /* parameters(
@@ -88,11 +113,35 @@ void setup()
      The transmit enable pin is used in half duplex communication to activate a MAX485 or similar
      to deactivate this mode use any value < 2 because 0 & 1 is reserved for Rx & Tx
   */
-  
+  const int TOTAL_REGS_SIZE = 5000;
   modbus_configure(&rs485, BAUD_RATE, deviceID, RS485_EN, TOTAL_REGS_SIZE);
   pinMode(ADC1, INPUT);
   pinMode(ADC2, INPUT);
   pinMode(7,OUTPUT);
+  holdingRegs[6] = v1p1;
+  holdingRegs[7] = v1p2;
+  holdingRegs[8] = v2p1;
+  holdingRegs[9] = v2p2;
+  holdingRegs[10] = v3p1;
+  holdingRegs[11] = v3p2;
+  holdingRegs[12] = a1p1;
+  holdingRegs[13] = a1p2;
+  holdingRegs[14] = a2p1;
+  holdingRegs[15] = a2p2;
+  holdingRegs[16] = a3p1;
+  holdingRegs[17] = a3p2;
+  holdingRegs[18] = p1p1;
+  holdingRegs[19] = p1p2;
+  holdingRegs[20] = p2p1;
+  holdingRegs[21] = p2p2;
+  holdingRegs[22] = p3p1;
+  holdingRegs[23] = p3p2;
+  holdingRegs[24] = k1p1;
+  holdingRegs[25] = k1p2;
+  holdingRegs[26] = k2p1;
+  holdingRegs[27] = k2p2;
+  holdingRegs[28] = k3p1;
+  holdingRegs[29] = k3p2;
   Serial.begin(9600);
 
 }
@@ -111,7 +160,7 @@ void loop()
   {
     digitalWrite(7,LOW);
   }
-
+  holdingRegs[ADC0]=analogRead(0);
   delay(100);
-  Serial.println(errorCount);
+  //Serial.println(errorCount);
 }
