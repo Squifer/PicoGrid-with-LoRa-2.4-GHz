@@ -489,10 +489,15 @@ void loop()
           String p = String(p1) +"_"+ String(p2)+"_"+ String(p3);
           String k = String(k1) +"_"+ String(k2) +"_"+ String(k3);
           //String data = String(v) +"_"+ String(a)+"_"+ String(p)+"_"+ String(k);
-          String data1 = String(v) +"_"+ String(a);
-          String data2 = String(p)+"_"+ String(k);
+          String id1 = "1";
+          String id2 = "2";
+          String data1 = id1 +"_"+ String(v) +"_"+ String(a);
+          String data2 = id2 +"_"+ String(p)+"_"+ String(k);
           // send out data
           PC_IF.print(F("Sending meter message...\n"));
+          PC_IF.print(data1 + "\n");
+          PC_IF.print(data2);
+          int test = 100;
 
           messageCnt++;
           
