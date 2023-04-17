@@ -27,11 +27,40 @@ function toHexString(bytes) {
 function decodeUplink(input ) {
   var tohex = toHexString(input.bytes);
   var toascii = hex_to_ascii(tohex);
-  return {
-    data: {
-      mydata: toascii
-    }
-  };
+  const dataArray = toascii.split("_"); // split the string into an array of substrings
+  // convert the substrings to an integer and store it in a variable
+  const idVariable = parseInt(dataArray[0]); 
+  const firstVariable = parseInt(dataArray[1]); 
+  const secondVariable = parseInt(dataArray[2]); 
+  const thirdVariable = parseInt(dataArray[3]); 
+  const fourthVariable = parseInt(dataArray[4]); 
+  const fifthVariable = parseInt(dataArray[5]); 
+  const sixthVariable = parseInt(dataArray[6]); 
+  
+  if (idVariable == 1) {
+    return {
+      data: {
+        v1: firstVariable,
+        v2: secondVariable,
+        v3: thirdVariable,
+        a1: fourthVariable,
+        a2: fifthVariable,
+        a3: sixthVariable
+      }
+    };
+  }
+  else if (idVariable == 2) {
+    return {
+      data: {
+        p1: firstVariable,
+        p2: secondVariable,
+        p3: thirdVariable,
+        k1: fourthVariable,
+        k2: fifthVariable,
+        k3: sixthVariable
+      }
+    };
+  }
 }
 
 // Encode downlink function.
