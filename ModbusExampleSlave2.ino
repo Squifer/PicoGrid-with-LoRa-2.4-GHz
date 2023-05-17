@@ -71,17 +71,14 @@ unsigned int holdingRegs[TOTAL_REGS_SIZE]; // function 3 and 16 register array
 #define TX            11     // Arduino defined pin (PB1, package pin #6)
 #define RS485_EN      6     // pin to set transmission mode on RS485 chip (PB2, package pin #7)
 #define BAUD_RATE     9600  // baud rate for serial communication
-#define deviceID      1     // this device address
+#define deviceID      2     // this device address
 
 // SoftwareSerial mySerial(receive pin, transmit pin)
 SoftwareSerial rs485(RX, TX); 
 
 int vHighGrid = 100, vLowGrid = 100, freqHighGrid = 100;
-int freqLowGrid = 100, pfGrid = 100, socSystem = 100;
-int powerBatSystem = 100, zeroExportPowerSystem = 100, timeBatSystem = 100;
-int voltSystem = 100, docBatSystem = 100, batShutdownSystem = 100;
-int voltageLoad = 100, currentSystem = 100, powerLoad = 100;
-int batStartSystem = 100, currentLoad = 100;
+int freqLowGrid = 100, pfGrid = 100, voltageLoad = 100;
+int powerLoad = 100, currentLoad = 100;
 
 void setup()
 {
@@ -100,23 +97,14 @@ void setup()
   pinMode(ADC1, INPUT);
   pinMode(ADC2, INPUT);
   pinMode(7,OUTPUT);
-  holdingRegs[6] = vHighGrid;
-  holdingRegs[7] = vLowGrid;
-  holdingRegs[8] = freqHighGrid;
-  holdingRegs[9] = freqLowGrid;
-  holdingRegs[10] = pfGrid;
-  holdingRegs[11] = socSystem;
-  holdingRegs[12] = powerBatSystem;
-  holdingRegs[13] = zeroExportPowerSystem;
-  holdingRegs[14] = timeBatSystem;
-  holdingRegs[15] = voltSystem;
-  holdingRegs[16] = docBatSystem;
-  holdingRegs[17] = batShutdownSystem;
-  holdingRegs[18] = voltageLoad;
-  holdingRegs[19] = currentSystem;
-  holdingRegs[20] = powerLoad;
-  holdingRegs[21] = batStartSystem;
-  holdingRegs[22] = currentLoad;
+  holdingRegs[30] = vHighGrid;
+  holdingRegs[31] = vLowGrid;
+  holdingRegs[32] = freqHighGrid;
+  holdingRegs[33] = freqLowGrid;
+  holdingRegs[34] = pfGrid;
+  holdingRegs[35] = powerLoad;
+  holdingRegs[36] = voltageLoad;
+  holdingRegs[37] = currentLoad;
   Serial.begin(9600);
 
 }
