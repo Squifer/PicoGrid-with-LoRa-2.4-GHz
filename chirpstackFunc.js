@@ -61,6 +61,26 @@ function decodeUplink(input ) {
       }
     };
   }
+  else if (idVariable == 3) {
+    return {
+      data: {
+        vHighGrid: firstVariable,
+        vLowGrid: secondVariable,
+        freqHighGrid: thirdVariable,
+        freqLowGrid: fourthVariable,
+        pfGrid: fifthVariable
+      }
+    };
+  }
+  else if (idVariable == 4) {
+    return {
+      data: {
+        powerLoad: firstVariable,
+        voltageLoad: secondVariable,
+        currentLoad: thirdVariable
+      }
+    };
+  }
 }
 
 // Encode downlink function.
